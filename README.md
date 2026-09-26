@@ -184,7 +184,6 @@ C++側ではOverlap判定とタグ取得を担当し、実際のゴール演出�
 
 ## リンク
 
-- デモ動画：準備中
-- 実行データ：GitHub Releases
-- プログラム以外の制作物：準備中
-- ポートフォリオ：準備中
+- デモ動画               ：準備中
+- 実行データ             ：https://github.com/nyankomaru/SpaceRacing_Portfolio/releases/tag/v1.0.0
+- プログラム以外の制作物  ：準備中
