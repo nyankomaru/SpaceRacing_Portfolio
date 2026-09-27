@@ -1,34 +1,44 @@
+/**
+ * @brief ã‚´ãƒ¼ãƒ«åˆ¤å®šç”¨Boxãƒˆãƒªã‚¬ãƒ¼Actorã®å®Ÿè£…
+ *
+ * C++å´ã§ã¯Overlapåˆ¤å®šã¨Actorã‚¿ã‚°å–å¾—ã‚’æ‹…å½“ã—ã€
+ * å®Ÿéš›ã®ã‚´ãƒ¼ãƒ«æ¼”å‡ºã‚„ãƒªã‚¶ãƒ«ãƒˆå‡¦ç†ã¯Blueprintå´ã§å®Ÿè£…ã§ãã‚‹ã‚ˆã†ã«ã—ã¦ã„ã‚‹ã€‚
+ *
+ * åˆ¤å®šå‡¦ç†ã¨æ¼”å‡ºå‡¦ç†ã‚’åˆ†ã‘ã‚‹ã“ã¨ã§ã€
+ * ã‚´ãƒ¼ãƒ«å‡¦ç†ã‚’æ‹¡å¼µã—ã‚„ã™ã„æ§‹æˆã«ã—ã¦ã„ã‚‹ã€‚
+ */
+
 #include "SquareHitBox.h"
 #include "Engine/Engine.h"
 
 ASquareHitBox::ASquareHitBox()
 {
-    //Tick‚Í•s—v‚È‚Ì‚Å–³Œø‰»iŒy—Ê‰»j
+    // Tickã¯ä¸è¦ãªã®ã§ç„¡åŠ¹åŒ–ï¼ˆè»½é‡åŒ–ï¼‰
     PrimaryActorTick.bCanEverTick = false;
 
-    //ƒgƒŠƒK[—pBoxƒRƒ“ƒ|[ƒlƒ“ƒg¶¬
+    // ãƒˆãƒªã‚¬ãƒ¼ç”¨Boxã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆç”Ÿæˆ
     TriggerBox = CreateDefaultSubobject<UBoxComponent>(TEXT("TriggerBox"));
 
-    //BoxƒTƒCƒYİ’èi•K—v‚É‰‚¶‚ÄƒGƒfƒBƒ^‚âƒR[ƒh‚Å’²®j
+    // Boxã‚µã‚¤ã‚ºè¨­å®šï¼ˆå¿…è¦ã«å¿œã˜ã¦ã‚¨ãƒ‡ã‚£ã‚¿ã‚„ã‚³ãƒ¼ãƒ‰ã§èª¿æ•´ï¼‰
     TriggerBox->SetBoxExtent(FVector(200.f, 200.f, 100.f));
 
-    //ƒNƒGƒŠê—piOverlap”»’è‚Ì‚İg—pj
+    // ã‚¯ã‚¨ãƒªå°‚ç”¨ï¼ˆOverlapåˆ¤å®šã®ã¿ä½¿ç”¨ï¼‰
     TriggerBox->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 
-    //‘S‚Ä‚Ìƒ`ƒƒƒ“ƒlƒ‹‚É‘Î‚µ‚ÄƒI[ƒo[ƒ‰ƒbƒv‚ğ‹–‰Â
+    // å…¨ã¦ã®ãƒãƒ£ãƒ³ãƒãƒ«ã«å¯¾ã—ã¦ã‚ªãƒ¼ãƒãƒ¼ãƒ©ãƒƒãƒ—ã‚’è¨±å¯
     TriggerBox->SetCollisionResponseToAllChannels(ECR_Overlap);
 
-    //ƒI[ƒo[ƒ‰ƒbƒvƒCƒxƒ“ƒg‚ğ—LŒø‰»
+    // ã‚ªãƒ¼ãƒãƒ¼ãƒ©ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã‚’æœ‰åŠ¹åŒ–
     TriggerBox->SetGenerateOverlapEvents(true);
 
-    //ƒQ[ƒ€’†‚Í”ñ•\¦iƒfƒoƒbƒO—p‚É‰Â‹‰»‚µ‚½‚¢ê‡‚Ífalsej
+    // ã‚²ãƒ¼ãƒ ä¸­ã¯éè¡¨ç¤ºï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ã«å¯è¦–åŒ–ã—ãŸã„å ´åˆã¯falseï¼‰
     TriggerBox->SetHiddenInGame(true);
 
-    //RootComponent‚Æ‚µ‚Äİ’è
+    // RootComponentã¨ã—ã¦è¨­å®š
     RootComponent = TriggerBox;
 
-    /** ƒI[ƒo[ƒ‰ƒbƒvŠJnEI—¹ƒCƒxƒ“ƒg‚ğƒoƒCƒ“ƒh
-    * BlueprintNativeEvent‚Å‚àC++À‘•ŠÖ”‚ğ’¼Úw’è‚Å‚«‚é*/
+    /** ã‚ªãƒ¼ãƒãƒ¼ãƒ©ãƒƒãƒ—é–‹å§‹ãƒ»çµ‚äº†ã‚¤ãƒ™ãƒ³ãƒˆã‚’ãƒã‚¤ãƒ³ãƒ‰
+    * BlueprintNativeEventã§ã‚‚C++å®Ÿè£…é–¢æ•°ã‚’ç›´æ¥æŒ‡å®šã§ãã‚‹*/
     TriggerBox->OnComponentBeginOverlap.AddDynamic(
         this, &ASquareHitBox::OnTriggerBeginOverlap
     );
@@ -46,14 +56,14 @@ void ASquareHitBox::OnTriggerBeginOverlap_Implementation(
     const FHitResult& SweepResult
 )
 {
-    // ©•ª©g‚Å‚È‚¯‚ê‚Îˆ—
+    // è‡ªåˆ†è‡ªèº«ã§ãªã‘ã‚Œã°å‡¦ç†
     if (OtherActor && OtherActor != this)
     {
-        // N“ü‚µ‚Ä‚«‚½Actor‚Ìƒ^ƒOˆê——‚ğæ“¾
+        // ä¾µå…¥ã—ã¦ããŸActorã®ã‚¿ã‚°ä¸€è¦§ã‚’å–å¾—
         const TArray<FName>& ActorTags = OtherActor->Tags;
 
 #if !UE_BUILD_SHIPPING
-        // ƒfƒoƒbƒO—pFActor–¼‚Æƒ^ƒO‚ğƒƒOo—Í
+        // ãƒ‡ãƒãƒƒã‚°ç”¨ï¼šActoråã¨ã‚¿ã‚°ã‚’ãƒ­ã‚°å‡ºåŠ›
         FString TagString;
         for (const FName& Tag : ActorTags)
         {
@@ -69,8 +79,8 @@ void ASquareHitBox::OnTriggerBeginOverlap_Implementation(
         );
 #endif
 
-        /*ƒS[ƒ‹“’BƒCƒxƒ“ƒg‚ğŒÄ‚Ño‚µ
-        EÀÛ‚ÌƒS[ƒ‹ˆ—‚ÍBlueprint‘¤‚ÅÀ‘•‚·‚é‘z’è*/
+        /*ã‚´ãƒ¼ãƒ«åˆ°é”ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‘¼ã³å‡ºã—
+        ãƒ»å®Ÿéš›ã®ã‚´ãƒ¼ãƒ«å‡¦ç†ã¯Blueprintå´ã§å®Ÿè£…ã™ã‚‹æƒ³å®š*/
         OnGoalTriggered(OtherActor, ActorTags);
     }
 }
@@ -82,8 +92,8 @@ void ASquareHitBox::OnTriggerEndOverlap_Implementation(
     int32 OtherBodyIndex
 )
 {
-    /** ƒgƒŠƒK[‚©‚çActor‚ª—£‚ê‚½‚Æ‚«‚Ìˆ—
-    * EŒ»“_‚Å‚Í–¢g—p
-    * EƒS[ƒ‹‰ğœAÄ“Ë“ü”»’è‚È‚Ç‚É—˜—p‰Â”\*/
+    /** ãƒˆãƒªã‚¬ãƒ¼ã‹ã‚‰ActorãŒé›¢ã‚ŒãŸã¨ãã®å‡¦ç†
+    * ãƒ»ç¾æ™‚ç‚¹ã§ã¯æœªä½¿ç”¨
+    * ãƒ»ã‚´ãƒ¼ãƒ«è§£é™¤ã€å†çªå…¥åˆ¤å®šãªã©ã«åˆ©ç”¨å¯èƒ½*/
 }
 

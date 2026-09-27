@@ -1,39 +1,49 @@
+/**
+ * @brief BGMの再生・停止・切り替えを管理するActorの実装
+ *
+ * BGM制御を専用Actorに集約し、Blueprint側から必要なタイミングで
+ * 再生・停止・切り替えを呼び出せるようにしている。
+ *
+ * 毎フレーム更新は不要なためTickを無効化し、
+ * イベント駆動で管理する構成にしている。
+ */
+
 #include "BGMManager.h"
 
 #include "Components/AudioComponent.h"
 #include "Sound/SoundBase.h"
 
 // =========================
-// �R���X�g���N�^
+// コンストラクタ
 // =========================
 
 ABGMManager::ABGMManager()
 {
-	// BGM�Ǘ��ł͖��t���[���X�V���s�v�Ȃ��߁ATick�͖�����
+	// BGM管理では毎フレーム更新が不要なため、Tickは無効化
 	PrimaryActorTick.bCanEverTick = false;
 
-	// BGM�Đ��p��AudioComponent���쐬
+	// BGM再生用のAudioComponentを作成
 	BGMComp = CreateDefaultSubobject<UAudioComponent>(TEXT("BGMComp"));
 	RootComponent = BGMComp;
 
-	// �����Đ��͍s�킸�A�K�v�ȃ^�C�~���O�ōĐ�����
+	// 自動再生は行わず、必要なタイミングで再生する
 	BGMComp->bAutoActivate = false;
 
-	// BGM�Ƃ��Ĉ����₷���悤��UI�T�E���h�ݒ�ɂ���
+	// BGMとして扱いやすいようにUIサウンド設定にする
 	BGMComp->bIsUISound = true;
 
-	// ���[�v�ݒ�͉������ōs���z��
+	// ループ設定は音源側で行う想定
 }
 
 // =========================
-// �J�n������
+// 開始時処理
 // =========================
 
 void ABGMManager::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// �K�v�Ȃ�J�n���Ƀf�t�H���gBGM���Đ�
+	// 必要なら開始時にデフォルトBGMを再生
 	if (bAutoPlayDefaultBGM && DefaultBGM)
 	{
 		PlayBGM(DefaultBGM, 0.5f);
@@ -41,21 +51,21 @@ void ABGMManager::BeginPlay()
 }
 
 // =========================
-// BGM�Đ�
+// BGM再生
 // =========================
 
 void ABGMManager::PlayBGM(USoundBase* BGM, float FadeInTime)
 {
-	// ������R���|�[�l���g�������ꍇ�͉������Ȃ�
+	// 音源やコンポーネントが無い場合は何もしない
 	if (!BGMComp || !BGM)
 	{
 		return;
 	}
 
-	// �Đ����鉹����ݒ�
+	// 再生する音源を設定
 	BGMComp->SetSound(BGM);
 
-	// �t�F�[�h�C���w�肪����΃t�F�[�h�t���ōĐ�
+	// フェードイン指定があればフェード付きで再生
 	if (FadeInTime > 0.0f)
 	{
 		BGMComp->FadeIn(FadeInTime, 1.0f);
@@ -67,18 +77,18 @@ void ABGMManager::PlayBGM(USoundBase* BGM, float FadeInTime)
 }
 
 // =========================
-// BGM��~
+// BGM停止
 // =========================
 
 void ABGMManager::StopBGM(float FadeOutTime)
 {
-	// �R���|�[�l���g�������ꍇ�͉������Ȃ�
+	// コンポーネントが無い場合は何もしない
 	if (!BGMComp)
 	{
 		return;
 	}
 
-	// �t�F�[�h�A�E�g�w�肪����Ώ��X�ɒ�~
+	// フェードアウト指定があれば徐々に停止
 	if (FadeOutTime > 0.0f)
 	{
 		BGMComp->FadeOut(FadeOutTime, 0.0f);
@@ -90,18 +100,18 @@ void ABGMManager::StopBGM(float FadeOutTime)
 }
 
 // =========================
-// BGM�؂�ւ�
+// BGM切り替え
 // =========================
 
 void ABGMManager::ChangeBGM(USoundBase* NewBGM, float FadeOutTime, float FadeInTime)
 {
-	// ������R���|�[�l���g�������ꍇ�͉������Ȃ�
+	// 音源やコンポーネントが無い場合は何もしない
 	if (!BGMComp || !NewBGM)
 	{
 		return;
 	}
 
-	// �Đ����Ȃ��x�t�F�[�h�A�E�g�������Ă��獷���ւ���
+	// 再生中なら一度フェードアウトをかけてから差し替える
 	if (BGMComp->IsPlaying() && FadeOutTime > 0.0f)
 	{
 		BGMComp->FadeOut(FadeOutTime, 0.0f);
@@ -118,7 +128,7 @@ void ABGMManager::ChangeBGM(USoundBase* NewBGM, float FadeOutTime, float FadeInT
 	}
 	else
 	{
-		// ��~���Ȃ炻�̂܂܍Đ��J�n
+		// 停止中ならそのまま再生開始
 		BGMComp->Stop();
 		PlayBGM(NewBGM, FadeInTime);
 	}

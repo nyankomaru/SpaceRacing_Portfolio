@@ -6,7 +6,7 @@
 #include "Sound/SoundBase.h"
 #include "PlayerChara.generated.h"
 
-// ‘O•ûéŒ¾
+// å‰æ–¹å®£è¨€
 class UCapsuleComponent;
 class USpringArmComponent;
 class UCameraComponent;
@@ -17,19 +17,19 @@ class APlanet;
 class AMyCamera;
 
 /**
- * ƒvƒŒƒCƒ„[ƒLƒƒƒ‰ƒNƒ^[ƒNƒ‰ƒX
+ * @brief ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åŸºç›¤ã‚¯ãƒ©ã‚¹ã«é€²è¡Œåº¦UIã¨Audioåˆ¶å¾¡ã‚’è¿½åŠ ã—ãŸã‚¯ãƒ©ã‚¹
  *
- * å‚È–ğŠ„F
- * EƒvƒŒƒCƒ„[‚ÌˆÚ“®A‰ñ“]A‘¬“x§Œä
- * EƒJƒƒ‰’Ç]‚â‹–ìŠp§Œä
- * EƒR[ƒXiSplinej‚É‰ˆ‚Á‚½is§Œä
- * Ei’»UI—p‚Ìis“xŒvZ
- * EƒGƒ“ƒWƒ“‰¹A‰ñ“]‰¹‚È‚Ç‚ÌAudio§Œä
+ * æ—¢å­˜ã®PlayerCharaã¯ã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ãƒ»å›è»¢ãƒ»ã‚«ãƒ¡ãƒ©å‡¦ç†ãªã©ã‚’
+ * ã¾ã¨ã‚ã¦æŒã¤åŸºç›¤ã‚¯ãƒ©ã‚¹ã§ã‚ã‚‹ã€‚
  *
- * •â‘«F
- * –{ƒNƒ‰ƒX‚Í•¡”‹@”\‚ğ‚Ü‚Æ‚ß‚Ä‚ÂƒvƒŒƒCƒ„[Šî”ÕƒNƒ‰ƒX‚Å‚ ‚èA
- * UIis“x•\¦‚ÆAudioü‚è‚Íå’S“–‚Æ‚µ‚Ä’²®E®—‚ğs‚Á‚Ä‚¢‚éB
- * ‚»‚êˆÈŠO‚ÌŠù‘¶ˆ—‚É‚Â‚¢‚Ä‚àA‘S‘Ì‚ÌŒ©’Ê‚µ‚ğ‚æ‚­‚·‚é–Ú“I‚Å\‘¢‚ğ®—‚µ‚Ä‚¢‚éB
+ * æœ¬ãƒ•ã‚¡ã‚¤ãƒ«ã§ã¯ã€ãã®æ—¢å­˜åŸºç›¤ã«å¯¾ã—ã¦æ‹…å½“ç¯„å›²ã§ã‚ã‚‹ä»¥ä¸‹ã®å‡¦ç†ã‚’è¿½åŠ ã—ã¦ã„ã‚‹ã€‚
+ * ãƒ»Splineãƒ™ãƒ¼ã‚¹ã®é€²è¡Œåº¦UI
+ * ãƒ»é€²è¡Œæ–¹å‘ã¨é€Ÿåº¦ã‚’ç”¨ã„ãŸé€†èµ°åˆ¤å®š
+ * ãƒ»æœ€å¤§åˆ°é”è·é›¢ã‚’ä¿æŒã™ã‚‹é€²è¡Œåº¦åˆ¶å¾¡
+ * ãƒ»ã‚¨ãƒ³ã‚¸ãƒ³éŸ³ã€å›è»¢éŸ³ãªã©ã®å…¥åŠ›é€£å‹•Audioåˆ¶å¾¡
+ *
+ * æ—¢å­˜ã®æ“ä½œãƒ»ç§»å‹•ãƒ»ã‚«ãƒ¡ãƒ©å‡¦ç†ã«ã¤ã„ã¦ã¯ã€æ‹…å½“å¤–ã®å‡¦ç†ã‚‚å«ã¾ã‚Œã‚‹ãŸã‚ã€
+ * ä¸€éƒ¨æ”¹ä¿®ã¨ã‚³ãƒ¡ãƒ³ãƒˆè¿½åŠ ã«ã‚ˆã‚Šå‡¦ç†ã®æµã‚Œã‚’è¿½ã„ã‚„ã™ã„ã‚ˆã†æ•´ç†ã—ã¦ã„ã‚‹ã€‚
  */
 UCLASS()
 class SWING_API APlayerChara : public AMyPawn
@@ -53,7 +53,7 @@ public:
 	// Overlap
 	// =========================
 
-	/** ƒI[ƒo[ƒ‰ƒbƒvŠJn */
+	/** ã‚ªãƒ¼ãƒãƒ¼ãƒ©ãƒƒãƒ—é–‹å§‹æ™‚ */
 	UFUNCTION()
 	void OnOverlapBegin(
 		UPrimitiveComponent* OverlappedComp,
@@ -64,7 +64,7 @@ public:
 		const FHitResult& SweepResult
 	);
 
-	/** ƒI[ƒo[ƒ‰ƒbƒvI—¹ */
+	/** ã‚ªãƒ¼ãƒãƒ¼ãƒ©ãƒƒãƒ—çµ‚äº†æ™‚ */
 	UFUNCTION()
 	void OnOverlapEnd(
 		UPrimitiveComponent* OverlappedComp,
@@ -106,28 +106,28 @@ public:
 
 	UPrimitiveComponent* GetSpline() const;
 
-	/** ŠJnˆÊ’uE‰ñ“]E‘¬“x‚ğ‹­§İ’è‚·‚é */
+	/** é–‹å§‹ä½ç½®ãƒ»å›è»¢ãƒ»é€Ÿåº¦ã‚’å¼·åˆ¶è¨­å®šã™ã‚‹ */
 	UFUNCTION(BlueprintCallable)
 	void SetStart(FVector _Loc, FRotator _Rot, float _Speed);
 
-	/** Œ»İ‘¬“x‚ğŒ¸Z‚·‚é */
+	/** ç¾åœ¨é€Ÿåº¦ã‚’æ¸›ç®—ã™ã‚‹ */
 	void SubSpeed(float _Rate);
 
 public:
 	// =========================
 	// Course UI
-	// å’S“–Fis“x•\¦—p
+	// ä¸»æ‹…å½“ï¼šé€²è¡Œåº¦è¡¨ç¤ºç”¨
 	// =========================
 
-	/** ƒR[ƒXis“x‚ğ 0.0 ` 1.0 ‚Å•Ô‚· */
+	/** ã‚³ãƒ¼ã‚¹é€²è¡Œåº¦ã‚’ 0.0 ï½ 1.0 ã§è¿”ã™ */
 	UFUNCTION(BlueprintPure, Category = "Course|UI")
 	float GetCourseProgress01() const;
 
-	/** ƒS[ƒ‹‚Ü‚Å‚Ìc‚è‹——£‚ğ•Ô‚· */
+	/** ã‚´ãƒ¼ãƒ«ã¾ã§ã®æ®‹ã‚Šè·é›¢ã‚’è¿”ã™ */
 	UFUNCTION(BlueprintPure, Category = "Course|UI")
 	float GetCourseRemainingDistance() const;
 
-	/** ‹t‘–’†‚©‚Ç‚¤‚©‚ğ•Ô‚· */
+	/** é€†èµ°ä¸­ã‹ã©ã†ã‹ã‚’è¿”ã™ */
 	UFUNCTION(BlueprintPure, Category = "Course|UI")
 	bool IsReverseOnCourse() const;
 
@@ -171,7 +171,7 @@ private:
 private:
 	// =========================
 	// Audio Update
-	// å’S“–FBGM / Audio ŠÖ˜A
+	// ä¸»æ‹…å½“ï¼šå…¥åŠ›é€£å‹•SE / Audio é–¢é€£
 	// =========================
 
 	void UpdateEngineAudio(float DeltaTime);
@@ -182,11 +182,11 @@ private:
 	// Collision / Mesh
 	// =========================
 
-	/** ƒƒCƒ“ƒRƒŠƒWƒ‡ƒ“ */
+	/** ãƒ¡ã‚¤ãƒ³ã‚³ãƒªã‚¸ãƒ§ãƒ³ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Collision", meta = (AllowPrivateAccess = "true"))
 	UCapsuleComponent* m_pMainCollision = nullptr;
 
-	/** ƒvƒŒƒCƒ„[ƒƒbƒVƒ… */
+	/** ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¡ãƒƒã‚·ãƒ¥ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mesh", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* m_pMesh = nullptr;
 
@@ -195,55 +195,55 @@ private:
 	// Camera
 	// =========================
 
-	/** ƒXƒvƒŠƒ“ƒOƒA[ƒ€ */
+	/** ã‚¹ãƒ—ãƒªãƒ³ã‚°ã‚¢ãƒ¼ãƒ  */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	USpringArmComponent* m_pSpring = nullptr;
 
-	/** ’Êí‚ÌƒXƒvƒŠƒ“ƒOƒA[ƒ€ˆÊ’u */
+	/** é€šå¸¸æ™‚ã®ã‚¹ãƒ—ãƒªãƒ³ã‚°ã‚¢ãƒ¼ãƒ ä½ç½® */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	FVector m_DefaAddSpringPos;
 
-	/** ƒƒCƒ“ƒJƒƒ‰ */
+	/** ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ© */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* m_pCamera = nullptr;
 
-	/** ’Êí‚ÌƒJƒƒ‰Šp“x */
+	/** é€šå¸¸æ™‚ã®ã‚«ãƒ¡ãƒ©è§’åº¦ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	FRotator m_DefaCameraRot;
 
-	/** ƒJƒƒ‰‰ñ“]‘¬“x */
+	/** ã‚«ãƒ¡ãƒ©å›è»¢é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_CameraRotSpeed = 0.0f;
 
-	/** ƒJƒƒ‰•œ‹A‘¬“x */
+	/** ã‚«ãƒ¡ãƒ©å¾©å¸°é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_CameraReturnRotSpeed = 0.0f;
 
-	/** ƒJƒƒ‰‹——£•Ï‰»‘¬“x */
+	/** ã‚«ãƒ¡ãƒ©è·é›¢å¤‰åŒ–é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_CameraLagDistanceSpeed = 0.0f;
 
-	/** ƒJƒƒ‰Å‘å‹——£ */
+	/** ã‚«ãƒ¡ãƒ©æœ€å¤§è·é›¢ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_CameraLagMaxDistance = 0.0f;
 
-	/** ’ÊíFOV */
+	/** é€šå¸¸FOV */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_DefaFOV = 0.0f;
 
-	/** ’Ç‰ÁFOVÅ‘å’l */
+	/** è¿½åŠ FOVæœ€å¤§å€¤ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_MaxAddFOV = 0.0f;
 
-	/** ‰Á‘¬’Ç‰ÁFOV */
+	/** åŠ é€Ÿæ™‚è¿½åŠ FOV */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_SpeedUpFOV = 0.0f;
 
-	/** ’ÊíFOV•Ï‰»‘¬“x */
+	/** é€šå¸¸æ™‚FOVå¤‰åŒ–é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_DefaAddFOVSpeed = 0.0f;
 
-	/** ‰Á‘¬FOV•Ï‰»‘¬“x */
+	/** åŠ é€Ÿæ™‚FOVå¤‰åŒ–é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	float m_SpeedUpAddFOVSpeed = 0.0f;
 
@@ -252,27 +252,27 @@ private:
 	// Move
 	// =========================
 
-	/** ˆÚ“®ƒRƒ“ƒ|[ƒlƒ“ƒg */
+	/** ç§»å‹•ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Move", meta = (AllowPrivateAccess = "true"))
 	UFloatingPawnMovement* m_pMovement = nullptr;
 
-	/** ‘Oi‘¬“x */
+	/** å‰é€²é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Move", meta = (AllowPrivateAccess = "true"))
 	float m_ForwardSpeed = 0.0f;
 
-	/** ƒR[ƒX•œ‹A‘¬“x */
+	/** ã‚³ãƒ¼ã‚¹å¾©å¸°é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Move", meta = (AllowPrivateAccess = "true"))
 	float m_ReturnCourseSpeed = 0.0f;
 
-	/** ƒR[ƒX•œ‹AÅ’á‘¬“x */
+	/** ã‚³ãƒ¼ã‚¹å¾©å¸°æœ€ä½é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Move", meta = (AllowPrivateAccess = "true"))
 	float m_MinReturnCourseSpeed = 0.0f;
 
-	/** ƒR[ƒXƒAƒEƒgŒ¸‘¬—¦ */
+	/** ã‚³ãƒ¼ã‚¹ã‚¢ã‚¦ãƒˆæ™‚æ¸›é€Ÿç‡ */
 	UPROPERTY(EditAnywhere, Category = "Move", meta = (AllowPrivateAccess = "true"))
 	float M_CourseOutRate = 0.0f;
 
-	/** ‘Oi“ü—Í’l */
+	/** å‰é€²å…¥åŠ›å€¤ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Input", meta = (AllowPrivateAccess = "true"))
 	float m_ForwardInput = 0.0f;
 
@@ -281,19 +281,19 @@ private:
 	// Rotation
 	// =========================
 
-	/** Å‘å‰ñ“]‘¬“x */
+	/** æœ€å¤§å›è»¢é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Rotation", meta = (AllowPrivateAccess = "true"))
 	float m_MaxRotSpeed = 0.0f;
 
-	/** Å‘å‰ñ“]‘¬“x‚É’B‚·‚éŠî€‘¬“x */
+	/** æœ€å¤§å›è»¢é€Ÿåº¦ã«é”ã™ã‚‹åŸºæº–é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Rotation", meta = (AllowPrivateAccess = "true"))
 	float m_ReachMaxRotSpeed = 0.0f;
 
-	/** is•ûŒü‚Ö–ß‚é‰ñ“]‘¬“x */
+	/** é€²è¡Œæ–¹å‘ã¸æˆ»ã‚‹å›è»¢é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Rotation", meta = (AllowPrivateAccess = "true"))
 	float m_ReturnRotSpeed = 0.0f;
 
-	/** ‰ñ“]’†S */
+	/** å›è»¢ä¸­å¿ƒ */
 	UPROPERTY(EditAnywhere, Category = "Rotation", meta = (AllowPrivateAccess = "true"))
 	FVector m_RotPivot;
 
@@ -302,86 +302,86 @@ private:
 	// Course / Spline
 	// =========================
 
-	/** ƒR[ƒXƒXƒvƒ‰ƒCƒ“ */
+	/** ã‚³ãƒ¼ã‚¹ã‚¹ãƒ—ãƒ©ã‚¤ãƒ³ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Course", meta = (AllowPrivateAccess = "true"))
 	USplineComponent* m_pSpline = nullptr;
 
-	/** ƒR[ƒX•œ‹A‹——£ */
+	/** ã‚³ãƒ¼ã‚¹å¾©å¸°è·é›¢ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Course", meta = (AllowPrivateAccess = "true"))
 	float m_ReturnCourseLen = 0.0f;
 
 private:
 	// =========================
 	// Course UI Parameter
-	// å’S“–Fis“x•\¦—p
+	// ä¸»æ‹…å½“ï¼šé€²è¡Œåº¦è¡¨ç¤ºç”¨
 	// =========================
 
-	/** ƒR[ƒX‘S’· */
+	/** ã‚³ãƒ¼ã‚¹å…¨é•· */
 	float m_SplineLen = 0.0f;
 
-	/** Œ»İ‚ÌƒXƒvƒ‰ƒCƒ“‹——£ */
+	/** ç¾åœ¨ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒ³è·é›¢ */
 	float m_CourseS = 0.0f;
 
-	/** ‘OƒtƒŒ[ƒ€‚ÌƒXƒvƒ‰ƒCƒ“‹——£ */
+	/** å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒ³è·é›¢ */
 	float m_CourseSPrev = 0.0f;
 
-	/** Å‘å“’B‹——£iƒQ[ƒW‚ğ–ß‚³‚È‚¢—pj */
+	/** æœ€å¤§åˆ°é”è·é›¢ï¼ˆã‚²ãƒ¼ã‚¸ã‚’æˆ»ã•ãªã„ç”¨ï¼‰ */
 	float m_CourseSBest = 0.0f;
 
-	/** UI•\¦—p‚Ì•½ŠŠ‰»‹——£ */
+	/** UIè¡¨ç¤ºç”¨ã®å¹³æ»‘åŒ–è·é›¢ */
 	float m_CourseSDisplay = 0.0f;
 
-	/** ‹t‘–’†‚©‚Ç‚¤‚© */
+	/** é€†èµ°ä¸­ã‹ã©ã†ã‹ */
 	bool m_bReverse = false;
 
-	/** ‹——£ƒWƒƒƒ“ƒv”»’è‚µ‚«‚¢’l */
+	/** è·é›¢ã‚¸ãƒ£ãƒ³ãƒ—åˆ¤å®šã—ãã„å€¤ */
 	UPROPERTY(EditAnywhere, Category = "Course|UI", meta = (AllowPrivateAccess = "true"))
 	float m_CourseJumpLimit = 8000.0f;
 
-	/** UI•âŠÔ‘¬“x */
+	/** UIè£œé–“é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Course|UI", meta = (AllowPrivateAccess = "true"))
 	float m_CourseUIInterp = 8.0f;
 
 private:
 	// =========================
 	// Audio Component
-	// å’S“–FBGM / Audio ŠÖ˜A
+	// ä¸»æ‹…å½“ï¼šå…¥åŠ›é€£å‹•SE / Audio é–¢é€£
 	// =========================
 
-	/** ’áˆæƒGƒ“ƒWƒ“‰¹ */
+	/** ä½åŸŸã‚¨ãƒ³ã‚¸ãƒ³éŸ³ */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UAudioComponent* EngineAudioLow = nullptr;
 
-	/** ‚ˆæƒGƒ“ƒWƒ“‰¹ */
+	/** é«˜åŸŸã‚¨ãƒ³ã‚¸ãƒ³éŸ³ */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UAudioComponent* EngineAudioHigh = nullptr;
 
-	/** ‰ñ“]‰¹ */
+	/** å›è»¢éŸ³ */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UAudioComponent* RotateAudio = nullptr;
 
-	/** ’áˆæƒGƒ“ƒWƒ“‰¹Œ¹ */
+	/** ä½åŸŸã‚¨ãƒ³ã‚¸ãƒ³éŸ³æº */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	USoundBase* EngineLowLoopSound = nullptr;
 
-	/** ‚ˆæƒGƒ“ƒWƒ“‰¹Œ¹ */
+	/** é«˜åŸŸã‚¨ãƒ³ã‚¸ãƒ³éŸ³æº */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	USoundBase* EngineHighLoopSound = nullptr;
 
-	/** ‰ñ“]‰¹Œ¹ */
+	/** å›è»¢éŸ³æº */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	USoundBase* RotateLoopSound = nullptr;
 
 private:
 	// =========================
 	// Audio Parameter
-	// å’S“–FBGM / Audio ŠÖ˜A
+	// ä¸»æ‹…å½“ï¼šå…¥åŠ›é€£å‹•SE / Audio é–¢é€£
 	// =========================
 
-	/** „—Í“ü—Í’li0`1j */
+	/** æ¨åŠ›å…¥åŠ›å€¤ï¼ˆ0ï½1ï¼‰ */
 	float m_ThrustInput01ThisFrame = 0.0f;
 
-	/** ‰ñ“]“ü—Í’li0`1j */
+	/** å›è»¢å…¥åŠ›å€¤ï¼ˆ0ï½1ï¼‰ */
 	float m_RotateInput01 = 0.0f;
 
 	// ---- Engine Low ----
@@ -410,11 +410,11 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Audio|EngineHigh", meta = (AllowPrivateAccess = "true"))
 	float EngineHighVolMax = 0.8f;
 
-	/** ƒGƒ“ƒWƒ“‰¹•âŠÔ‘¬“x */
+	/** ã‚¨ãƒ³ã‚¸ãƒ³éŸ³è£œé–“é€Ÿåº¦ */
 	UPROPERTY(EditAnywhere, Category = "Audio|Engine", meta = (AllowPrivateAccess = "true"))
 	float EngineInterpSpeed = 8.0f;
 
-	/** ƒGƒ“ƒWƒ““ü—Í•½ŠŠ‰»’l */
+	/** ã‚¨ãƒ³ã‚¸ãƒ³å…¥åŠ›å¹³æ»‘åŒ–å€¤ */
 	float EngineThrustSmoothed = 0.0f;
 
 	// ---- Rotate ----
@@ -433,13 +433,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Audio|Rotate", meta = (AllowPrivateAccess = "true"))
 	float RotateInterpSpeed = 10.0f;
 
-	/** ‰ñ“]“ü—Í•½ŠŠ‰»’l */
+	/** å›è»¢å…¥åŠ›å¹³æ»‘åŒ–å€¤ */
 	float RotateInputSmoothed = 0.0f;
 
 private:
 	// =========================
 	// Existing State
-	// ’S“–ŠO‚¾‚ªŒ©’Ê‚µ‰ü‘P‚Ì‚½‚ß®—
+	// æ‹…å½“å¤–ã ãŒè¦‹é€šã—æ”¹å–„ã®ãŸã‚æ•´ç†
 	// =========================
 
 	TArray<APlanet*> m_pPlanets;

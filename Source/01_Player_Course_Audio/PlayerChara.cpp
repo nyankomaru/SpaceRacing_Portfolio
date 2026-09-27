@@ -1,5 +1,16 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+/**
+ * @brief æ—¢å­˜ã®PlayerCharaã«é€²è¡Œåº¦UIã¨Audioåˆ¶å¾¡ã‚’è¿½åŠ ã—ãŸå®Ÿè£…ãƒ•ã‚¡ã‚¤ãƒ«
+ *
+ * æ—¢å­˜ã®ç§»å‹•ãƒ»å›è»¢ãƒ»ã‚«ãƒ¡ãƒ©å‡¦ç†ã‚’æŒã¤PlayerCharaã«å¯¾ã—ã¦ã€
+ * æ‹…å½“ç¯„å›²ã§ã‚ã‚‹Splineãƒ™ãƒ¼ã‚¹ã®é€²è¡Œåº¦UIã€é€†èµ°åˆ¤å®šã€
+ * ã‚¨ãƒ³ã‚¸ãƒ³éŸ³ãƒ»å›è»¢éŸ³ã®Audioåˆ¶å¾¡ã‚’è¿½åŠ ã—ã¦ã„ã‚‹ã€‚
+ *
+ * æ—¢å­˜å‡¦ç†ã«ã¤ã„ã¦ã¯ã€ä¸€éƒ¨æ”¹ä¿®ã¨ã‚³ãƒ¡ãƒ³ãƒˆè¿½åŠ ã‚’è¡Œã„ã€
+ * å‡¦ç†ã®æµã‚Œã‚’è¿½ã„ã‚„ã™ã„ã‚ˆã†ã«æ•´ç†ã—ã¦ã„ã‚‹ã€‚
+ */
+
 #include "PlayerChara.h"
 
 #include "Camera/CameraComponent.h"
@@ -48,15 +59,15 @@ APlayerChara::APlayerChara()
 	m_pMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("m_pMesh"));
 	if (m_pMesh)
 	{
-		// ƒ‹[ƒg‚Éİ’è
+		// ãƒ«ãƒ¼ãƒˆã«è¨­å®š
 		RootComponent = m_pMesh;
 
-		// ƒƒbƒVƒ…‘¤‚ÅƒI[ƒo[ƒ‰ƒbƒv”»’è‚ğó‚¯‚é
+		// ãƒ¡ãƒƒã‚·ãƒ¥å´ã§ã‚ªãƒ¼ãƒãƒ¼ãƒ©ãƒƒãƒ—åˆ¤å®šã‚’å—ã‘ã‚‹
 		m_pMesh->SetGenerateOverlapEvents(true);
 		m_pMesh->OnComponentBeginOverlap.AddDynamic(this, &APlayerChara::OnOverlapBegin);
 		m_pMesh->OnComponentEndOverlap.AddDynamic(this, &APlayerChara::OnOverlapEnd);
 
-		// “–‚½‚è”»’èİ’è
+		// å½“ãŸã‚Šåˆ¤å®šè¨­å®š
 		m_pMesh->SetCollisionProfileName(TEXT("MyBlockDynamic"));
 		m_pMesh->SetEnableGravity(false);
 	}
@@ -82,11 +93,11 @@ APlayerChara::APlayerChara()
 	m_pMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("m_pMovement"));
 	if (m_pMovement)
 	{
-		// ‰Šúİ’è‚Í•K—v‚É‰‚¶‚Ä’Ç‰Á
+		// åˆæœŸè¨­å®šã¯å¿…è¦ã«å¿œã˜ã¦è¿½åŠ 
 	}
 
 	// -------------------------
-	// Audioiå’S“–j
+	// Audioï¼ˆä¸»æ‹…å½“ï¼šå…¥åŠ›é€£å‹•SEï¼‰
 	// -------------------------
 	EngineAudioLow = CreateDefaultSubobject<UAudioComponent>(TEXT("EngineAudioLow"));
 	if (EngineAudioLow)
@@ -121,14 +132,14 @@ void APlayerChara::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// GameInstance‚Ö“o˜^
+	// GameInstanceã¸ç™»éŒ²
 	if (UMyGameInstance* GameInstance = GetGameInstance<UMyGameInstance>())
 	{
 		GameInstance->SetPlayer(this);
 		m_pSpline = GameInstance->GetCourseSpline();
 	}
 
-	// UIis“x—p‚Ì‰Šú‰»
+	// UIé€²è¡Œåº¦ç”¨ã®åˆæœŸåŒ–
 	if (m_pSpline)
 	{
 		m_SplineLen = m_pSpline->GetSplineLength();
@@ -139,7 +150,7 @@ void APlayerChara::BeginPlay()
 		m_bReverse = false;
 	}
 
-	// Audioƒ‹[ƒvŠJniå’S“–j
+	// Audioãƒ«ãƒ¼ãƒ—é–‹å§‹ï¼ˆä¸»æ‹…å½“ï¼šå…¥åŠ›é€£å‹•SEï¼‰
 	if (EngineAudioLow && EngineLowLoopSound)
 	{
 		EngineAudioLow->SetSound(EngineLowLoopSound);
@@ -164,12 +175,12 @@ void APlayerChara::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	// -------------------------
-	// Audio—p“ü—ÍƒLƒƒƒbƒVƒ…iå’S“–j
+	// Audioç”¨å…¥åŠ›ã‚­ãƒ£ãƒƒã‚·ãƒ¥ï¼ˆä¸»æ‹…å½“ï¼šæ¨åŠ›å…¥åŠ›ã‚’éŸ³ã¸åæ˜ ã™ã‚‹ãŸã‚ä¿æŒï¼‰
 	// -------------------------
 	m_ThrustInput01ThisFrame = FMath::Clamp(FMath::Abs(m_ForwardInput), 0.0f, 1.0f);
 
 	// -------------------------
-	// Šî–{XV
+	// åŸºæœ¬æ›´æ–°
 	// -------------------------
 	UpdateRotation(DeltaTime);
 	UpdateMove(DeltaTime);
@@ -177,18 +188,18 @@ void APlayerChara::Tick(float DeltaTime)
 	UpdateSocket();
 
 	// -------------------------
-	// UIis“xXViå’S“–j
+	// UIé€²è¡Œåº¦æ›´æ–°ï¼ˆä¸»æ‹…å½“ï¼šSplineãƒ™ãƒ¼ã‚¹ã®é€²è¡Œåº¦è¡¨ç¤ºï¼‰
 	// -------------------------
 	UpdateCourseProgress(DeltaTime);
 
 	// -------------------------
-	// AudioXViå’S“–j
+	// Audioæ›´æ–°ï¼ˆä¸»æ‹…å½“ï¼šã‚¨ãƒ³ã‚¸ãƒ³éŸ³ãƒ»å›è»¢éŸ³ã®æ›´æ–°ï¼‰
 	// -------------------------
 	UpdateEngineAudio(DeltaTime);
 	UpdateRotateAudio(DeltaTime);
 
 	// -------------------------
-	// ƒtƒŒ[ƒ€I’[ˆ—
+	// ãƒ•ãƒ¬ãƒ¼ãƒ çµ‚ç«¯å‡¦ç†
 	// -------------------------
 	m_RotateInput01 = 0.0f;
 	ValueReset();
@@ -260,7 +271,7 @@ void APlayerChara::OnOverlapBegin(
 		return;
 	}
 
-	// d—Í”»’èƒIƒuƒWƒFƒNƒg‚È‚ç’Ç‰Á
+	// é‡åŠ›åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãªã‚‰è¿½åŠ 
 	if (OtherComp->ComponentHasTag(TEXT("Gravity")))
 	{
 		m_pPlanets.Add(Cast<APlanet>(OtherActor));
@@ -279,7 +290,7 @@ void APlayerChara::OnOverlapEnd(
 		return;
 	}
 
-	// d—Í”»’èƒIƒuƒWƒFƒNƒg‚È‚çœŠO
+	// é‡åŠ›åˆ¤å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãªã‚‰é™¤å¤–
 	if (OtherComp->ComponentHasTag(TEXT("Gravity")))
 	{
 		m_pPlanets.Remove(Cast<APlanet>(OtherActor));
@@ -306,7 +317,7 @@ void APlayerChara::RemoveSocket(AActor* _p)
 {
 	if (_p)
 	{
-		// Šù‘¶ƒR[ƒh‚Å‚Í–¢À‘•
+		// æ—¢å­˜ã‚³ãƒ¼ãƒ‰ã§ã¯æœªå®Ÿè£…
 	}
 }
 
@@ -367,14 +378,14 @@ void APlayerChara::SubSpeed(float _Rate)
 
 void APlayerChara::UpdateRotation(float DeltaTime)
 {
-	// ‰ñ“]“ü—Í‚ª‚ ‚é
+	// å›è»¢å…¥åŠ›ãŒã‚ã‚‹æ™‚
 	if (!m_Rot.IsZero())
 	{
 		for (int i = 0; i < 3; ++i)
 		{
 			if (*(&m_Rot.Pitch + i) != 0.0f)
 			{
-				// “ü—Í•ûŒü‚ª•Ï‚í‚Á‚½‚ç‰ñ“]‘¬“x‚ğƒŠƒZƒbƒg
+				// å…¥åŠ›æ–¹å‘ãŒå¤‰ã‚ã£ãŸã‚‰å›è»¢é€Ÿåº¦ã‚’ãƒªã‚»ãƒƒãƒˆ
 				if (FMath::Sign(*(&m_Rot.Pitch + i)) != FMath::Sign(*(&m_PreRotIn.Pitch + i)))
 				{
 					*(&m_NowRotSpeed.Pitch + i) = 0.0f;
@@ -394,7 +405,7 @@ void APlayerChara::UpdateRotation(float DeltaTime)
 				FMath::Sign(*(&m_NowRotSpeed.Pitch + i));
 		}
 
-		// dS‚É’†S‚ğ‡‚í‚¹‚Ä‰ñ“]
+		// é‡å¿ƒã«ä¸­å¿ƒã‚’åˆã‚ã›ã¦å›è»¢
 		AddActorLocalOffset(m_RotPivot);
 
 		FVector VecDire[3](GetActorForwardVector(), GetActorRightVector(), GetActorUpVector());
@@ -413,19 +424,19 @@ void APlayerChara::UpdateRotation(float DeltaTime)
 
 		SetActorRotation(UKismetMathLibrary::MakeRotationFromAxes(VecDire[0], VecDire[1], VecDire[2]));
 
-		// ‰ñ“]’†S‚ğ–ß‚·
+		// å›è»¢ä¸­å¿ƒã‚’æˆ»ã™
 		AddActorLocalOffset(-m_RotPivot);
 	}
 	else
 	{
-		// ‰ñ“]“ü—Í‚ª‚È‚¢‚Í‰ñ“]‘¬“x‚ğŒ¸Š
+		// å›è»¢å…¥åŠ›ãŒãªã„æ™‚ã¯å›è»¢é€Ÿåº¦ã‚’æ¸›è¡°
 		for (int i = 0; i < 3; ++i)
 		{
 			*(&m_NowRotSpeed.Pitch + i) -=
 				FMath::Sign(*(&m_NowRotSpeed.Pitch + i)) * DeltaTime / m_ReachMaxRotSpeed;
 		}
 
-		// ƒR[ƒXŠOA‚Ü‚½‚Í‘Oi“ü—Í‚È‚µ‚Ì‚Íis•ûŒü‚Ö–ß‚·
+		// ã‚³ãƒ¼ã‚¹å¤–ã€ã¾ãŸã¯å‰é€²å…¥åŠ›ãªã—ã®æ™‚ã¯é€²è¡Œæ–¹å‘ã¸æˆ»ã™
 		if (m_ForwardInput == 0.0f || m_bReturnCource)
 		{
 			SetActorRotation(
@@ -475,17 +486,17 @@ void APlayerChara::UpdateMove(float DeltaTime)
 		m_ForwardInputTime -= DeltaTime;
 	}
 
-	// “ü—ÍŠJn’¼Œã‚Í­‚µ‹­‚ß‚ÉFOV‰‰o
+	// å…¥åŠ›é–‹å§‹ç›´å¾Œã¯å°‘ã—å¼·ã‚ã«FOVæ¼”å‡º
 	if (m_PreForwardInput != m_ForwardInput && m_PreForwardInput == 0.0f && m_StrongFOVTimer == 0.0f)
 	{
 		m_StrongFOVTimer = 0.1f;
 	}
 	m_PreForwardInput = m_ForwardInput;
 
-	// ƒJƒƒ‰ƒ‰ƒO‹——£§ŒÀ
+	// ã‚«ãƒ¡ãƒ©ãƒ©ã‚°è·é›¢åˆ¶é™
 	m_pSpring->CameraLagMaxDistance = FMath::Clamp(CameraLagDistance, 0.1f, m_CameraLagMaxDistance);
 
-	// “ü—ÍŒp‘±ŠÔ‚ğ0`1‚Éû‚ß‚é
+	// å…¥åŠ›ç¶™ç¶šæ™‚é–“ã‚’0ï½1ã«åã‚ã‚‹
 	m_ForwardInputTime = FMath::Clamp(m_ForwardInputTime, 0.0f, 1.0f);
 
 	// -------------------------
@@ -519,7 +530,7 @@ void APlayerChara::UpdateMove(float DeltaTime)
 		AddMoveDire += GravityVec;
 	}
 
-	// ‰Á‘¬“x•ª‚ğ’~Ï
+	// åŠ é€Ÿåº¦åˆ†ã‚’è“„ç©
 	m_Velocity += AddMoveDire * DeltaTime;
 
 	// -------------------------
@@ -575,7 +586,7 @@ void APlayerChara::UpdateCamera(float DeltaTime)
 
 void APlayerChara::UpdateCameraRot(float DeltaTime)
 {
-	// ƒJƒƒ‰“ü—Í‚ª‚ ‚é‚Í‰ñ“]
+	// ã‚«ãƒ¡ãƒ©å…¥åŠ›ãŒã‚ã‚‹æ™‚ã¯å›è»¢
 	if (!m_CameraRotInput.IsZero())
 	{
 		if (m_ChangeCtrl > 0.0f)
@@ -604,7 +615,7 @@ void APlayerChara::UpdateCameraRot(float DeltaTime)
 		);
 	}
 
-	// is•ûŒü‚Æ‹@‘Ì‘O•û‚Ì’†ŠÔ•ûŒü‚Ö•âŠÔ
+	// é€²è¡Œæ–¹å‘ã¨æ©Ÿä½“å‰æ–¹ã®ä¸­é–“æ–¹å‘ã¸è£œé–“
 	{
 		FRotator MidRot((m_pMovement->Velocity.GetSafeNormal() + m_pMesh->GetForwardVector()).Rotation());
 
@@ -738,7 +749,7 @@ void APlayerChara::Deceleration(float _value)
 {
 	if (_value != 0.0f)
 	{
-		// Šù‘¶ƒR[ƒh‚Å‚Í–¢À‘•
+		// æ—¢å­˜ã‚³ãƒ¼ãƒ‰ã§ã¯æœªå®Ÿè£…
 	}
 }
 
@@ -815,7 +826,7 @@ void APlayerChara::ChangeAutoRot()
 }
 
 // ==================================================
-// Audio Updateiå’S“–j
+// Audio Updateï¼ˆä¸»æ‹…å½“ï¼šå…¥åŠ›é€£å‹•SEï¼‰
 // ==================================================
 
 void APlayerChara::UpdateEngineAudio(float DeltaTime)
@@ -825,7 +836,7 @@ void APlayerChara::UpdateEngineAudio(float DeltaTime)
 		return;
 	}
 
-	// „—Í“ü—Í‚ğŠŠ‚ç‚©‚É”½‰f
+	// æ¨åŠ›å…¥åŠ›ã‚’æ»‘ã‚‰ã‹ã«åæ˜ 
 	EngineThrustSmoothed = FMath::FInterpTo(
 		EngineThrustSmoothed,
 		m_ThrustInput01ThisFrame,
@@ -878,7 +889,7 @@ void APlayerChara::UpdateRotateAudio(float DeltaTime)
 }
 
 // ==================================================
-// Course UI Updateiå’S“–j
+// Course UI Updateï¼ˆä¸»æ‹…å½“ï¼‰
 // ==================================================
 
 void APlayerChara::UpdateCourseProgress(float DeltaTime)
@@ -890,12 +901,12 @@ void APlayerChara::UpdateCourseProgress(float DeltaTime)
 
 	const FVector Loc = GetActorLocation();
 
-	// Å‹ß“_‚ÌƒL[¨‹——£
+	// æœ€è¿‘ç‚¹ã®ã‚­ãƒ¼â†’è·é›¢
 	const float Key = m_pSpline->FindInputKeyClosestToWorldLocation(Loc);
 	float S = m_pSpline->GetDistanceAlongSplineAtSplineInputKey(Key);
 	S = FMath::Clamp(S, 0.0f, m_SplineLen);
 
-	// 3DƒR[ƒX‚Å•Ê‹æŠÔ‚É‹z‚í‚ê‚éƒWƒƒƒ“ƒv‚ğ—}§
+	// 3Dã‚³ãƒ¼ã‚¹ã§åˆ¥åŒºé–“ã«å¸ã‚ã‚Œã‚‹ã‚¸ãƒ£ãƒ³ãƒ—ã‚’æŠ‘åˆ¶
 	if (FMath::Abs(S - m_CourseSPrev) > m_CourseJumpLimit)
 	{
 		S = FMath::FInterpTo(m_CourseSPrev, S, DeltaTime, m_CourseUIInterp);
@@ -904,7 +915,7 @@ void APlayerChara::UpdateCourseProgress(float DeltaTime)
 	m_CourseSPrev = S;
 	m_CourseS = S;
 
-	// ‹t‘–”»’è
+	// é€†èµ°åˆ¤å®š
 	const FVector TangentDir =
 		m_pSpline->GetDirectionAtDistanceAlongSpline(m_CourseS, ESplineCoordinateSpace::World);
 
@@ -912,10 +923,10 @@ void APlayerChara::UpdateCourseProgress(float DeltaTime)
 	const float Dot = FVector::DotProduct(Vel.GetSafeNormal(), TangentDir);
 	m_bReverse = (Dot < -0.2f);
 
-	// UI•\¦‚ÍÅ‘å“’B‹——£‚ğg‚¤
+	// UIè¡¨ç¤ºã¯æœ€å¤§åˆ°é”è·é›¢ã‚’ä½¿ã†
 	m_CourseSBest = FMath::Max(m_CourseSBest, m_CourseS);
 
-	// •\¦—p•½ŠŠ‰»
+	// è¡¨ç¤ºç”¨å¹³æ»‘åŒ–
 	m_CourseSDisplay = FMath::FInterpTo(
 		m_CourseSDisplay,
 		m_CourseSBest,

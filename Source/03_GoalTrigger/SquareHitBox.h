@@ -5,32 +5,41 @@
 #include "Components/BoxComponent.h"
 #include "SquareHitBox.generated.h"
 
+/**
+ * @brief ã‚´ãƒ¼ãƒ«åˆ¤å®šç”¨ã®Boxãƒˆãƒªã‚¬ãƒ¼Actor
+ *
+ * C++å´ã§ã¯Overlapåˆ¤å®šã¨Actorã‚¿ã‚°å–å¾—ã‚’æ‹…å½“ã—ã€
+ * ã‚´ãƒ¼ãƒ«åˆ°é”æ™‚ã®æ¼”å‡ºã‚„ãƒªã‚¶ãƒ«ãƒˆå‡¦ç†ã¯Blueprintå´ã§å®Ÿè£…ã§ãã‚‹ã‚ˆã†ã«ã—ã¦ã„ã‚‹ã€‚
+ *
+ * BlueprintImplementableEventã‚’é€šã—ã¦å‡¦ç†ã‚’æ¸¡ã™ã“ã¨ã§ã€
+ * åˆ¤å®šå‡¦ç†ã¨æ¼”å‡ºå‡¦ç†ã‚’åˆ†é›¢ã—ã€æ‹¡å¼µã—ã‚„ã™ã„æ§‹æˆã«ã—ã¦ã„ã‚‹ã€‚
+ */
 UCLASS()
 class SWING_API ASquareHitBox : public AActor
 {
 	GENERATED_BODY()
 
 public:
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	ASquareHitBox();
 
 protected:
-	//ƒgƒŠƒK[”»’è—p‚ÌBoxƒRƒ“ƒ|[ƒlƒ“ƒg
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, CateGory = "GoalTrigger")
+	// ãƒˆãƒªã‚¬ãƒ¼åˆ¤å®šç”¨ã®Boxã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "GoalTrigger")
 	UBoxComponent* TriggerBox;
 
-	//ƒgƒŠƒK[‚ÉActor‚ªN“ü‚µ‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éƒCƒxƒ“ƒg
+	// ãƒˆãƒªã‚¬ãƒ¼ã«ActorãŒä¾µå…¥ã—ãŸã¨ãã«å‘¼ã°ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
 	UFUNCTION(BlueprintNativeEvent, Category = "GoalTrigger")
 	void OnTriggerBeginOverlap(
-		UPrimitiveComponent* OverlappedComp,	//d‚È‚Á‚½‘¤‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
-		AActor* OtherActor,						//N“ü‚µ‚Ä‚«‚½Actor
-		UPrimitiveComponent* OtherComp,			//N“ü‚µ‚Ä‚«‚½Actor‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
+		UPrimitiveComponent* OverlappedComp,	//é‡ãªã£ãŸå´ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+		AActor* OtherActor,						//ä¾µå…¥ã—ã¦ããŸActor
+		UPrimitiveComponent* OtherComp,			//ä¾µå…¥ã—ã¦ããŸActorã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		int32 OtherBodyIndex,
 		bool bFromSweep,
 		const FHitResult& SweepResult
 	);
 
-	//OnTriggerBeginOverlap ‚ÌC++À‘•
+	// OnTriggerBeginOverlap ã®C++å®Ÿè£…
 	virtual void OnTriggerBeginOverlap_Implementation(
 		UPrimitiveComponent* OverlappedComp,
 		AActor* OtherActor,
@@ -40,16 +49,16 @@ protected:
 		const FHitResult& SweepResult
 	);
 
-	//ƒgƒŠƒK[‚©‚çActor‚ªo‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éƒCƒxƒ“ƒg
+	// ãƒˆãƒªã‚¬ãƒ¼ã‹ã‚‰ActorãŒå‡ºãŸã¨ãã«å‘¼ã°ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆ
 	UFUNCTION(BlueprintNativeEvent, Category = "GoalTrigger")
 	void OnTriggerEndOverlap(
-		UPrimitiveComponent* OverlappedComp, //d‚È‚Á‚Ä‚¢‚½‘¤‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
-		AActor* OtherActor,                  //o‚Ä‚¢‚Á‚½Actor
-		UPrimitiveComponent* OtherComp,      //o‚Ä‚¢‚Á‚½Actor‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg
+		UPrimitiveComponent* OverlappedComp, //é‡ãªã£ã¦ã„ãŸå´ã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
+		AActor* OtherActor,                  //å‡ºã¦ã„ã£ãŸActor
+		UPrimitiveComponent* OtherComp,      //å‡ºã¦ã„ã£ãŸActorã®ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 		int32 OtherBodyIndex
 	);
 
-	//OnTriggerEndOverlap ‚ÌC++À‘•
+	// OnTriggerEndOverlap ã®C++å®Ÿè£…
 	virtual void OnTriggerEndOverlap_Implementation(
 		UPrimitiveComponent* OverlappedComp,
 		AActor* OtherActor,
@@ -57,7 +66,7 @@ protected:
 		int32 OtherBodyIndex
 	);
 
-	//ƒS[ƒ‹“’B‚Ìˆ——pƒCƒxƒ“ƒg
+	// ã‚´ãƒ¼ãƒ«åˆ°é”æ™‚ã®å‡¦ç†ç”¨ã‚¤ãƒ™ãƒ³ãƒˆ
 	UFUNCTION(BlueprintImplementableEvent, Category = "GoalTrigger")
 	void OnGoalTriggered(
 		AActor* OverlappingActor,

@@ -4,20 +4,18 @@
 #include "GameFramework/Actor.h"
 #include "BGMManager.generated.h"
 
-// ‘O•ûéŒ¾
+// å‰æ–¹å®£è¨€
 class UAudioComponent;
 class USoundBase;
 
 /**
- * BGM‚ğŠÇ—‚·‚éActor
+ * @brief BGMã®å†ç”Ÿãƒ»åœæ­¢ãƒ»åˆ‡ã‚Šæ›¿ãˆã‚’ç®¡ç†ã™ã‚‹Actor
  *
- * å‚È–ğŠ„F
- * EBGM‚ÌÄ¶
- * EBGM‚Ì’â~
- * EBGM‚ÌØ‚è‘Ö‚¦
+ * BGMåˆ¶å¾¡ã‚’å°‚ç”¨Actorã«é›†ç´„ã—ã€Blueprintå´ã‹ã‚‰å¿…è¦ãªã‚¿ã‚¤ãƒŸãƒ³ã‚°ã§
+ * å†ç”Ÿãƒ»åœæ­¢ãƒ»åˆ‡ã‚Šæ›¿ãˆã‚’å‘¼ã³å‡ºã›ã‚‹ã‚ˆã†ã«ã—ã¦ã„ã‚‹ã€‚
  *
- * ƒŒƒxƒ‹“à‚É”z’u‚µ‚Äg—p‚µA
- * •K—v‚É‰‚¶‚ÄƒfƒtƒHƒ‹ƒgBGM‚ğ©“®Ä¶‚·‚éB
+ * ãƒ¬ãƒ™ãƒ«å†…ã«é…ç½®ã—ã¦ä½¿ç”¨ã—ã€å¿…è¦ã«å¿œã˜ã¦ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆBGMã‚’è‡ªå‹•å†ç”Ÿã§ãã‚‹ã€‚
+ * æ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°ã¯ä¸è¦ãªãŸã‚ã€å®Ÿè£…å´ã§ã¯Tickã‚’ç„¡åŠ¹åŒ–ã—ã¦ã„ã‚‹ã€‚
  */
 UCLASS()
 class SWING_API ABGMManager : public AActor
@@ -28,56 +26,56 @@ public:
 	ABGMManager();
 
 protected:
-	/** ƒQ[ƒ€ŠJn‚ÉŒÄ‚Î‚ê‚é */
+	/** ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã«å‘¼ã°ã‚Œã‚‹ */
 	virtual void BeginPlay() override;
 
 public:
 	// =========================
-	// BGM‘€ì
+	// BGMæ“ä½œ
 	// =========================
 
 	/**
-	 * BGM‚ğÄ¶‚·‚é
-	 * @param BGM Ä¶‚·‚é‰¹Œ¹
-	 * @param FadeInTime ƒtƒF[ƒhƒCƒ“ŠÔ
+	 * BGMã‚’å†ç”Ÿã™ã‚‹
+	 * @param BGM å†ç”Ÿã™ã‚‹éŸ³æº
+	 * @param FadeInTime ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³æ™‚é–“
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Audio|BGM")
 	void PlayBGM(USoundBase* BGM, float FadeInTime = 0.5f);
 
 	/**
-	 * BGM‚ğ’â~‚·‚é
-	 * @param FadeOutTime ƒtƒF[ƒhƒAƒEƒgŠÔ
+	 * BGMã‚’åœæ­¢ã™ã‚‹
+	 * @param FadeOutTime ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆæ™‚é–“
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Audio|BGM")
 	void StopBGM(float FadeOutTime = 0.5f);
 
 	/**
-	 * BGM‚ğØ‚è‘Ö‚¦‚é
-	 * @param NewBGM Ø‚è‘Ö‚¦æ‚Ì‰¹Œ¹
-	 * @param FadeOutTime ƒtƒF[ƒhƒAƒEƒgŠÔ
-	 * @param FadeInTime ƒtƒF[ƒhƒCƒ“ŠÔ
+	 * BGMã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
+	 * @param NewBGM åˆ‡ã‚Šæ›¿ãˆå…ˆã®éŸ³æº
+	 * @param FadeOutTime ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆæ™‚é–“
+	 * @param FadeInTime ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³æ™‚é–“
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Audio|BGM")
 	void ChangeBGM(USoundBase* NewBGM, float FadeOutTime = 0.5f, float FadeInTime = 0.5f);
 
 private:
 	// =========================
-	// ƒRƒ“ƒ|[ƒlƒ“ƒg
+	// ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
 	// =========================
 
-	/** BGMÄ¶‚Ég‚¤AudioComponent */
+	/** BGMå†ç”Ÿã«ä½¿ã†AudioComponent */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Audio", meta = (AllowPrivateAccess = "true"))
 	UAudioComponent* BGMComp = nullptr;
 
 	// =========================
-	// İ’è
+	// è¨­å®š
 	// =========================
 
-	/** ‹N“®‚É©“®Ä¶‚·‚éBGM */
+	/** èµ·å‹•æ™‚ã«è‡ªå‹•å†ç”Ÿã™ã‚‹BGM */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio|BGM", meta = (AllowPrivateAccess = "true"))
 	USoundBase* DefaultBGM = nullptr;
 
-	/** BeginPlay‚ÅDefaultBGM‚ğ©“®Ä¶‚·‚é‚© */
+	/** BeginPlayã§DefaultBGMã‚’è‡ªå‹•å†ç”Ÿã™ã‚‹ã‹ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Audio|BGM", meta = (AllowPrivateAccess = "true"))
 	bool bAutoPlayDefaultBGM = true;
 };
